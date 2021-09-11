@@ -1,0 +1,12 @@
+{% extends "reg/layout.html" %}
+
+{% block body %}
+
+<h1>Flights</h1>
+<ul>
+    {% for A in reg %}
+    <li><a href="{% url " reg:A" A.id %}">course {{ A }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
