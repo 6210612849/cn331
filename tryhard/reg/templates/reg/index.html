@@ -2,11 +2,10 @@
 
 {% block body %}
 
-<h1>Flights</h1>
-<ul>
-    {% for A in reg %}
-    <li><a href="{% url " reg:A" A.id %}">course {{ A }}</a></li>
+    <h1>reg</h1>
+    
+    {% for i in reg %}
+    <li><a href="{%url 'reg:course' i.course_id %}">{{ i }}</a></li>
     {% endfor %}
-</ul>
 
 {% endblock %}
