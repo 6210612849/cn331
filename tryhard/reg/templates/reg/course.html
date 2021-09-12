@@ -1,0 +1,27 @@
+{% extends "reg/layout.html" %}
+
+{% block body %}
+
+    <h1>Student in this {{ c.course_name }} class</h1>
+    
+    {% for i in course %}
+    <li>{{ i }}</li>
+    {% empty %}
+    <li> this class don't have student</li>
+    {% endfor %}
+
+
+    <h2>add student</h2>
+    <form action="" method="POST">
+        {% csrf_token%}
+        <select name="student">
+            {% for student in notInCourse %}
+            <option value="{{ student }}">{{student}}</option>
+            {% endfor%}
+        </select>
+        <input type="submit" value="Add student">
+    </form>
+
+    <p><a href= "{% url 'reg:index'%}" >Course List</a></p>
+
+{% endblock %}
