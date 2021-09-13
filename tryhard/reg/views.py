@@ -11,14 +11,16 @@ def index(request):
         "reg": Course.objects.all()
     })
 
+
 def course(request, course_id):
     c = get_object_or_404(Course, pk=course_id)
     return render(request, "reg/course.html", {
-        "course": c,
-        #"notInCourse": Student.objects.exclude(subjects=course_id).all(),
+        "course": c, "student": c.student_list.all, "student_not": Student.objects.exclude(subjects=course_id).all()
+        # "notInCourse": Student.objects.exclude(subjects=course_id).all(),
     })
+
 
 def addStudent(request, course_id):
     return None
-#def student(request, student_id):
+# def student(request, student_id):
 #    return None
