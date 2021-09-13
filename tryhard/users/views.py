@@ -13,6 +13,7 @@ def index(request):
         return render(request, "users/index.html")
 
 def login_view(request):
+    #messages.success(request, "Logged in desu")
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -25,7 +26,7 @@ def login_view(request):
             return render(request, "users/login.html", {
                 "messages": messages.get_messages(request)
             })
-
+    
     if "next" in request.GET:
         next = request.GET["next"]
     else:
@@ -34,7 +35,7 @@ def login_view(request):
     return render(request, "users/login.html", {
         "next": next
     })
-
+    
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged out.")

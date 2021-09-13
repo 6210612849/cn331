@@ -21,15 +21,18 @@
 
 
 <h2>add student</h2>
-<form action="" method="POST">
+<form action="{% url 'reg:addStudent' course.id %}" method="POST">
     {% csrf_token%}
     <select name="student">
         {% for student in student_not %}
-        <option value="{{ student }}">{{student}}</option>
+        <option value="{{ student.id }}">{{student}}</option>
         {% endfor%}
     </select>
-    <input type="submit" value="Add student">
+    <input type="submit" value="Add Student">
 </form>
+
+
+<h1>{{ testvar }}</h1>
 
 <p><a href="{% url 'reg:index'%}">Course List</a></p>
 
