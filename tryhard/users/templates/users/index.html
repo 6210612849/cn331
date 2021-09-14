@@ -2,12 +2,16 @@
 
 {% block body %}
 
-<h1>Welcome, {{ request.user.first_name }}</h1>
+<h1>Welcome, {{ request.user }}</h1>
 
 <ul>
     <li>Username: {{ request.user.username }}</li>
     <li>Email: {{ request.user.email }}</li>
 </ul>
 <a href="{% url 'reg:index' %}">course</a>
+<p></p>
 <a href="{% url 'users:logout' %}">Log out</a>
+<p></p>
+<a href="{% url 'users:reg' %}">Regist</a>
+
 {% endblock %}

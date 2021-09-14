@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from reg.models import Course
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -13,19 +14,22 @@ def index(request):
         return render(request, "users/index.html")
 
 def login_view(request):
+    #messages.success(request, "Logged in desu")
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(request.GET["next"])
+            return HttpResponseRedirect(reverse("users:index"))
         else:
             messages.warning(request, "Invalid credential.")
             return render(request, "users/login.html", {
                 "messages": messages.get_messages(request)
             })
-
+    return render(request, "users/login.html")
+    
+    """
     if "next" in request.GET:
         next = request.GET["next"]
     else:
@@ -34,10 +38,18 @@ def login_view(request):
     return render(request, "users/login.html", {
         "next": next
     })
-
+    """
+    
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged out.")
     return render(request, "users/login.html", {
         "messages": messages.get_messages(request)
+    })
+
+def reg(request):
+    subjects = get_object_or_404(Course)
+    return render(request, "users/reg.html", {
+        "course": subjects,
+        "student": subjects.studentIn.all(),
     })
