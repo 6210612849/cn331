@@ -7,11 +7,13 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
     else:
         return render(request, "users/index.html")
+
 
 def login_view(request):
     #messages.success(request, "Logged in desu")
@@ -28,7 +30,7 @@ def login_view(request):
                 "messages": messages.get_messages(request)
             })
     return render(request, "users/login.html")
-    
+
     """
     if "next" in request.GET:
         next = request.GET["next"]
@@ -39,13 +41,15 @@ def login_view(request):
         "next": next
     })
     """
-    
+
+
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged out.")
     return render(request, "users/login.html", {
         "messages": messages.get_messages(request)
     })
+
 
 def reg(request):
     subjects = get_object_or_404(Course)

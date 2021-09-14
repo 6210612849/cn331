@@ -1,0 +1,34 @@
+.userstatus{
+    background-color: #e2daff;
+    color: #C25100;
+    font-size: 40px;
+    width:  auto;
+    height: auto;
+    margin-right: 0;
+    float:right;
+    overflow: hidden;
+}
+.userlogin{
+    background-color: #f4f7e0;
+    color: rgb(163, 65, 0);
+    width:  auto;
+    height: auto;
+    font-size: 30px;
+    float:right;
+}
+.main{
+    color: #b907ff;
+    margin: 0 auto;
+    font-size: 50px;
+    text-align: center;
+ 
+}
+
+.clearfix{
+    clear: both;
+}
+
+
+header{
+    background-color: #C25100;
+}

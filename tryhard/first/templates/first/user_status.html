@@ -1,0 +1,40 @@
+{% extends "first/layout.html" %}
+{%load static%}
+
+<head>
+    {% block head %}
+    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+
+    <div class="main">hello</div>
+    <div class="clearfix">
+    </div>
+    {%if request.user.is_authenticated %}
+    <div class="userstatus">
+        Username: {{request.user}}
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="userlogin">
+        <p><a href="{% url 'users:index'%}">Proflie</a></p>
+    </div>
+
+
+    {% else %}
+    <div class="userstatus">
+        not login!
+    </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="userlogin">
+        <p><a href="{% url 'users:index'%}">Pls login</a></p>
+    </div>
+
+    {% endif %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% endblock %}
+</body>

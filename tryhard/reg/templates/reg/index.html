@@ -1,11 +1,21 @@
 {% extends "reg/layout.html" %}
 
 {% block body %}
+<link rel='stylesheet' href='/static/assets/admin/css/users_status.css' />
+<div class="userstatus">
+    Username: {{request.user}}
+</div>
+
+
+<body>
 
     <h1>reg</h1>
-    
-    {% for i in reg %}
-    <li><a href="{%url 'reg:course' i.course_id %}">{{ i }}</a></li>
-    {% endfor %}
 
-{% endblock %}
+    <body>
+        {% for i in reg %}
+        <li><a href="{%url 'reg:course' i.course_id %}">{{ i }}</a></li>
+        {% endfor %}
+    </body>
+    <p><a href="{% url 'first:index'%}">Main</a></p>
+    <p><a href="{% url 'users:index'%}">Proflie</a></p>
+    {% endblock %}

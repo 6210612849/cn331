@@ -2,10 +2,10 @@
 
 {% block body %}
 
-    {% if messages %}
-        {% for message in messages %}
-        <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-        {% endfor %}
+{% if messages %}
+{% for message in messages %}
+<div{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
     {% endif %}
 
     <form action="{% url 'users:login' %}?next={{ next }}" method="post">
@@ -14,5 +14,6 @@
         <input type="password" name="password" placeholder="Password">
         <input type="submit" value="Login">
     </form>
+    <p><a href="{% url 'first:index'%}">Main</a></p>
 
-{% endblock %}
+    {% endblock %}
