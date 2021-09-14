@@ -1,0 +1,46 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+
+<h1>Student in this class</h1>
+
+<a>{{ stu }}</a>
+
+{%for i in stu %}
+<li>
+    {{i}}
+</li>
+{% endfor%}
+<h1>55</h1>
+<a>{{ notCourse }}</a>
+
+{%for j in notCourse %}
+<li>
+    {{j}}
+</li>
+{% endfor%}
+
+<p><a href="{% url 'reg:index'%}">Course List</a></p>
+
+<h2>edit course</h2>
+<form action="{% url 'users:addCourse'%}" method="POST">
+    {% csrf_token%}
+    <select name="course">
+        {% for course in notCourse %}
+        <option value="{{ course.id }}">{{course}}</option>
+        {% endfor%}
+    </select>
+    <input type="submit" value="Add Course">
+</form>
+
+<form action="{% url 'users:rmCourse'%}" method="POST">
+    {% csrf_token%}
+    <select name="course">
+        {% for course in stu %}
+        <option value="{{ course.id }}">{{course}}</option>
+        {% endfor%}
+    </select>
+    <input type="submit" value="remove Course">
+</form>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from reg.models import Course
+from reg.models import Course, Student
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -52,8 +52,26 @@ def logout_view(request):
 
 
 def reg(request):
-    subjects = get_object_or_404(Course)
+    
+    stu = Student.objects.get(pk=(request.user.id)).subjects.all()
+    notCourse = Course.objects.exclude(pk__in=stu)
+    
     return render(request, "users/reg.html", {
-        "course": subjects,
-        "student": subjects.studentIn.all(),
+        "notCourse": notCourse,
+        "stu": stu,
+
     })
+
+def addCourse(request):
+    if request.method == "POST":
+        stu = Student.objects.get(pk=(request.user.id))
+        course = request.POST["course"]
+        stu = stu.subjects.add(course)
+    return HttpResponseRedirect(reverse("users:reg"))
+
+def rmCourse(request):
+    if request.method == "POST":
+        stu = Student.objects.get(pk=(request.user.id))
+        course = request.POST["course"]
+        stu = stu.subjects.remove(course)
+    return HttpResponseRedirect(reverse("users:reg"))
