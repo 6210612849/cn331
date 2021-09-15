@@ -23,7 +23,7 @@
 <h2>add student</h2>
 <form action="{% url 'reg:addStudent' course.id %}" method="POST">
     {% csrf_token%}
-    <select name="student">
+    <select name="course">
         {% for student in student_not %}
         <option value="{{ student.id }}">{{student}}</option>
         {% endfor%}

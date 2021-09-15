@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h1>Welcome, {{ request.user }}</h1>
+<h1>Welcome, {{ request.user.id }}</h1>
 
 <ul>
     <li>Username: {{ request.user.username }}</li>

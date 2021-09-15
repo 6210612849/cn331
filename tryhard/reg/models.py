@@ -18,7 +18,7 @@ class Student(models.Model):
     #first_name = models.CharField(max_length=64)
     #last_name = models.CharField(max_length=64)
     student_id = models.OneToOneField(User, blank=True, on_delete=models.CASCADE,)
-    subjects = models.ManyToManyField(Course, blank=True, related_name="studentIn")
+    subjects = models.ManyToManyField(Course, blank=True, related_name="subjects")
     credit = models.IntegerField(null=True)
 
     def __str__(self):
