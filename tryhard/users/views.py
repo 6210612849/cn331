@@ -16,7 +16,7 @@ def index(request):
 
 
 def login_view(request):
-    #messages.success(request, "Logged in desu")
+    # messages.success(request, "Logged in desu")
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -52,16 +52,18 @@ def logout_view(request):
 
 
 def reg(request):
-    
-    stu = Student.objects.get(pk=(request.user.id)).subjects.all()
+
+    stu = Student.objects.get(pk=request.user.id).subjects.all()
+    print(stu)
     studentUser = Student.objects.get(pk=(request.user.id))
     notCourse = Course.objects.exclude(pk__in=stu)
     return render(request, "users/reg.html", {
         "stu": stu,
         "studentUser": studentUser,
         "notCourse": notCourse,
-        
+
     })
+
 
 def addCourse(request):
     if request.method == "POST":
@@ -72,38 +74,38 @@ def addCourse(request):
         student_seat = 1
         course_credit = Course.objects.get(pk=(course)).credit
         course_seat = Course.objects.get(pk=(course)).seat
-        
+
         if (student_credit >= course_credit) and (course_seat > 0):
             student_credit = student_credit - course_credit
             course_seat = course_seat - student_seat
-            Student.objects.filter(pk=request.user.id).update(credit=student_credit)
+            Student.objects.filter(pk=request.user.id).update(
+                credit=student_credit)
             Course.objects.filter(pk=(course)).update(seat=course_seat)
             student = student.subjects.add(course)
             return HttpResponseRedirect(reverse("users:reg"))
         else:
             return HttpResponseRedirect(reverse("users:reg"))
-                 
+
+
 def rmCourse(request):
     if request.method == "POST":
         stu = Student.objects.get(pk=(request.user.id))
         course = request.POST["course"]
-        
+
         course_credit = Course.objects.get(pk=(course)).credit
         student_credit = Student.objects.get(pk=(request.user.id)).credit
         student_seat = 1
         course_seat = Course.objects.get(pk=(course)).seat
 
-        if (student_credit + course_credit) <= 22:
-            
-            student_credit = student_credit - course_credit
-            course_seat = course_seat + student_seat
-            Student.objects.filter(pk=request.user.id).update(credit=student_credit)
-            Course.objects.filter(pk=(course)).update(seat=course_seat)
-            stu = stu.subjects.remove(course)
-            
-            return HttpResponseRedirect(reverse("users:reg"))
-        else:
-            message = "this is massage"
-            print(messages)
-            return HttpResponseRedirect(reverse("users:reg"))
+        student_credit = student_credit + course_credit
+        course_seat = course_seat + student_seat
+        Student.objects.filter(pk=request.user.id).update(
+            credit=student_credit)
+        Course.objects.filter(pk=(course)).update(seat=course_seat)
+        stu = stu.subjects.remove(course)
+        return HttpResponseRedirect(reverse("users:reg"))
 
+
+def change(request):
+
+    return render(request, "users/change.html")

@@ -1,21 +1,57 @@
-{% extends "reg/layout.html" %}
+{%load static%}
+<!DOCTYPE html>
+<html>
 
-{% block body %}
-<link rel='stylesheet' href='/static/assets/admin/css/users_status.css' />
-<div class="userstatus">
-    Username: {{request.user}}
-</div>
-
+<head>
+    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+</head>
 
 <body>
+    <div class="topnav">
+        <a class="Main" href="{% url 'first:index'%}">Home </a>
+        <a href="{% url 'reg:index' %}">Course List</a>
+        <a href="{% url 'users:index'%}">Website Profile</a>
+        <a href="{% url 'first:index'%}">Contact</a>
 
-    <h1>reg</h1>
+        <a class="login" href="{% url 'users:index'%}">
+            <div class="user_status">
+                {%if request.user.is_authenticated %}
+                <div class="user_status_on">
+                    Username: {{request.user}}
+                </div>
+                {% else %}
+                <div class="user_status_off">
+                    Please Login!
+                </div>
+                {%endif%}
 
-    <body>
-        {% for i in reg %}
-        <li><a href="{%url 'reg:course' i.course_id %}">{{ i }}</a></li>
-        {% endfor %}
-    </body>
-    <p><a href="{% url 'first:index'%}">Main</a></p>
-    <p><a href="{% url 'users:index'%}">Proflie</a></p>
-    {% endblock %}
+            </div>
+        </a>
+    </div>
+
+    <div class="content">
+        <div class="content_head">
+            Course
+        </div>
+        <div class="content_list">
+            {% for i in reg %}
+            <ol>
+                <div class="content_list_id">
+                    Course : {{i.id}}
+                </div>
+                <div class="content_list_name">
+                    Course name : {{i.course_name}}
+                </div>
+                <div class="content_list_credit">
+                    Credit: {{i.credit}}
+                </div>
+                <div class="content_list_seat">
+                    Seat : {{i.seat}}
+                </div>
+                <a href="{%url 'reg:course' i.course_id %}">Detail</a>
+            </ol>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>

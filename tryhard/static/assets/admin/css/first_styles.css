@@ -1,34 +1,162 @@
-.userstatus{
-    background-color: #e2daff;
-    color: #C25100;
-    font-size: 40px;
-    width:  auto;
-    height: auto;
-    margin-right: 0;
-    float:right;
-    overflow: hidden;
-}
-.userlogin{
-    background-color: #f4f7e0;
-    color: rgb(163, 65, 0);
-    width:  auto;
-    height: auto;
-    font-size: 30px;
-    float:right;
-}
-.main{
-    color: #b907ff;
-    margin: 0 auto;
-    font-size: 50px;
-    text-align: center;
- 
-}
 
-.clearfix{
-    clear: both;
-}
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
+    .topnav {
+        width: auto;
+        overflow: hidden;
+        background-color: rgb(49, 51, 20);
+        height: 100px;
 
-header{
-    background-color: #C25100;
-}
+    }
+
+    .topnav a {
+        margin-top: 20px;
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 20px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .topnav :hover {
+        border-radius: 200px;
+        color: black;
+        background-color: rgb(186, 194, 75);
+    }
+
+    .topnav a.login {
+        float: right;
+        margin-right: 20px;
+    }
+
+    .topnav .user_status {
+        color: #f2f2f2;
+    }
+    .content {
+        width: 100%;
+        background-color: #e4e4e4;
+        height: auto;
+        padding-bottom: 100px;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .content .content_head {
+        
+        padding-top: 50px;
+        color: #020000;
+        font-size: 60px;
+       padding-left: 600px;
+       padding-bottom: 50px;
+    }
+
+    .content .content_list {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 25px;
+        color: #020000;
+        background-color: #ffffff;
+    }
+
+    .content .content_list .content_list_id {
+        width: 200px;
+        float: left;
+    }
+
+    .content .content_list .content_list_name {
+        width: 400px;
+        float: left;
+
+    }
+
+    .content .content_list .content_list_credit {
+        width: 250px;
+        float: left;
+
+    }
+
+    .content .content_list .content_list_seat {
+        width: 250px;
+        float: left;
+
+    }
+
+    .content .content_list a {
+        text-decoration: none;
+    }
+    .user_profile{
+        float: left;
+        width: 400px;
+        height: 2000px;
+        background-color:rgb(255, 140, 106)
+    }
+    .user_profile .picture{
+    
+        width: 350px;
+        height: 350px;
+        background-image: url(/static/assets/admin/img/ayaya.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: 10px dashed rgb(4, 71, 255);
+        margin-left: 15px;
+    }
+    .user_profile .information {
+        padding-top: 100px;
+    }
+    .user_profile .information .information_name {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: rgb(253, 208, 194);
+    }
+    .user_profile .information .information_name ol {
+        margin-left: 20px;
+        text-decoration: none;
+        font-size: 30px;
+        color: black;}
+    
+    .user_profile .information .information_change{
+     
+     background-color: rgb(253, 208, 194);
+     margin-top: 20px;
+        padding: 20px;
+        
+    }
+    .user_profile .information .information_regis{
+        width: 380x;
+        height: 60x;
+        background-color: rgb(253, 208, 194);
+        margin-top: 20px;
+           padding: 20px;
+           
+       }
+    .user_profile .information .information_change ol:hover{
+    
+        border-radius: 200px;
+        color: black;
+        background-color: rgb(255, 234, 227);}
+
+    .user_profile .information .information_regis ol:hover{
+        border-radius: 200px;
+        color: black;
+        background-color: rgb(255, 249, 246);}
+
+    
+    .user_profile .information .information_regis ol a{
+    
+        text-decoration: none;
+        font-size: 30px;
+        color: black;}
+    .user_profile .information .information_change ol a{
+    
+        text-decoration: none;
+        font-size: 30px;
+    color: black;}
+    .reg_content{
+        height: 2000px;
+    }

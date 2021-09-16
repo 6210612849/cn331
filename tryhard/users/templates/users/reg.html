@@ -1,47 +1,90 @@
-{% extends "users/layout.html" %}
+{%load static%}
+<!DOCTYPE html>
+<html>
 
-{% block body %}
+<head>
+    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+</head>
 
-<h5>{{ massage }}</h5>
+<body>
+    <div class="topnav">
+        <a class="Main" href="{% url 'first:index'%}">Home </a>
+        <a href="{% url 'reg:index' %}">Course List</a>
+        <a href="{% url 'users:index'%}">Website Profile</a>
+        <a href="{% url 'first:index'%}">Contact</a>
 
-<a>Your credit:{{ studentUser.credit }}</a>
-<h1>Your Course</h1>
-<h1></h1>
+        <a class="login" href="{% url 'users:index'%}">
+            <div class="user_status">
+                {%if request.user.is_authenticated %}
+                <div class="user_status_on">
+                    Username: {{request.user}}
+                </div>
+                {% else %}
+                <div class="user_status_off">
+                    Please Login!
+                </div>
+                {%endif%}
 
-{%for enableCourse in stu %}
-<li>
-    {{enableCourse}}
-</li>
-{% endfor%}
+            </div>
+        </a>
+    </div>
+    <div class="user_profile">
+        <div class="picture">
 
-<h1>Course that you might interest</h1>
+        </div>
+        <div class="information">
+            <div class="information_name">
+                <ol> Hi! : {{request.user}}</ol>
+            </div>
+            <div class="information_change">
+                <ol><a href="{%url 'users:change'%}">Change picture profile</a></ol>
+            </div>
+            <div class="information_regis">
+                <ol><a href="{%url 'users:reg'%}">Regis</a></ol>
+            </div>
+        </div>
+    </div>
+    <div class="reg_content">
+        <h5>{{ massage }}</h5>
 
-{%for j in notCourse %}
-<li>
-    {{j}}
-</li>
-{% endfor%}
+        <a>Your credit:{{ studentUser.credit }}</a>
+        <h1>Your Course</h1>
+        <h1></h1>
 
-<h2>edit course</h2>
-<form action="{% url 'users:addCourse'%}" method="POST">
-    {% csrf_token%}
-    <select name="course">
-        {% for course in notCourse %}
-        <option value="{{ course.id }}">{{course}}</option>
+        {%for enableCourse in stu %}
+        <li>
+            {{enableCourse}}
+        </li>
         {% endfor%}
-    </select>
-    <input type="submit" value="Add Course">
-</form>
 
-<form action="{% url 'users:rmCourse'%}" method="POST">
-    {% csrf_token%}
-    <select name="course">
-        {% for course in stu %}
-        <option value="{{ course.id }}">{{course}}</option>
+        <h1>Course that you might interest</h1>
+
+        {%for j in notCourse %}
+        <li>
+            {{j}}
+        </li>
         {% endfor%}
-    </select>
-    <input type="submit" value="remove Course">
-</form>
 
-<p><a href="{% url 'reg:index'%}">Course List</a></p>
-{% endblock %}
+        <h2>edit course</h2>
+        <form action="{% url 'users:addCourse'%}" method="POST">
+            {% csrf_token%}
+            <select name="course">
+                {% for course in notCourse %}
+                <option value="{{ course.id }}">{{course}}</option>
+                {% endfor%}
+            </select>
+            <input type="submit" value="Add Course">
+        </form>
+
+        <form action="{% url 'users:rmCourse'%}" method="POST">
+            {% csrf_token%}
+            <select name="course">
+                {% for course in stu %}
+                <option value="{{ course.id }}">{{course}}</option>
+                {% endfor%}
+            </select>
+            <input type="submit" value="remove Course">
+        </form>
+
+        <p><a href="{% url 'reg:index'%}">Course List</a></p>
+    </div>

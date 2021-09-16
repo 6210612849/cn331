@@ -1,16 +1,16 @@
 {% extends "first/user_status.html" %}
 {%load static%}
 
-<body>
-    {% block body %}
-    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
-    <div class="clearfix">
-    </div>
-    <h1>hello</h1>
-    <h2>
-        <img src="{% static 'assets/admin/img/ayaya_gif.gif' %}">
+</html>
+{%block body %}
+<link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+<div class="clearfix">
+</div>
+<h1>hello</h1>
+<h2>
+    <img src="{% static 'assets/admin/img/ayaya_gif.gif' %}">
 
-    </h2>
-    <p><a href="{% url 'reg:index'%}">Course List</a></p>
-    {% endblock %}
+</h2>
+<p><a href="{% url 'reg:index'%}">Course List</a></p>
+{% endblock %}
 </body>
