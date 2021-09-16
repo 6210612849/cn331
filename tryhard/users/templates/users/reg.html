@@ -2,25 +2,25 @@
 
 {% block body %}
 
-<h1>Student in this class</h1>
+<h5>{{ massage }}</h5>
 
-<a>{{ stu }}</a>
+<a>Your credit:{{ studentUser.credit }}</a>
+<h1>Your Course</h1>
+<h1></h1>
 
-{%for i in stu %}
+{%for enableCourse in stu %}
 <li>
-    {{i}}
+    {{enableCourse}}
 </li>
 {% endfor%}
-<h1>55</h1>
-<a>{{ notCourse }}</a>
+
+<h1>Course that you might interest</h1>
 
 {%for j in notCourse %}
 <li>
     {{j}}
 </li>
 {% endfor%}
-
-<p><a href="{% url 'reg:index'%}">Course List</a></p>
 
 <h2>edit course</h2>
 <form action="{% url 'users:addCourse'%}" method="POST">
@@ -43,4 +43,5 @@
     <input type="submit" value="remove Course">
 </form>
 
+<p><a href="{% url 'reg:index'%}">Course List</a></p>
 {% endblock %}
