@@ -3,6 +3,7 @@
 <html>
 
 <head>
+    <title>REGS</title>
     <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
 </head>
 
@@ -35,13 +36,13 @@
                 </div>
                 <div class="information">
                     <div class="information_name">
-                        <ol> Hi! : {{request.user}}</ol>
+                        <ol> Hi!: {{request.user}}</ol>
                     </div>
                     <div class="information_change">
                         <ol><a href="{%url 'users:change'%}">Change picture profile</a></ol>
                     </div>
                     <div class="information_regis">
-                        <ol><a href="{%url 'users:reg'%}">Regis</a></ol>
+                        <ol><a href="{%url 'users:reg'%}">Regist</a></ol>
                     </div>
                     <div class="information_logout">
                         <ol><a href="{%url 'users:login'%}">Logout</a></ol>
@@ -61,15 +62,30 @@
                         <h1>Your Course</h1>
                     </div>
                     <div class="your_course_content">
+                        <style>
+                            table, th, td {  
+                                text-align: center;
+                            }
+                            </style>
+                            <table style="width:100%">
+                                <tr>
+                                    <th>Course name</th>
+                                    <th>Credit</th>
+                                    <th>Seatleft</th>
+                                </tr>
+                                {% for enableCourse in stu %}
+                                <tr>
+                                    
+                                    <td>{{enableCourse.course_name}}</td>
+                                    <td>{{enableCourse.credit}}</td>
+                                    <td>{{enableCourse.seat}}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                              </table>    
                         {%for enableCourse in stu %}
-                        <ol>
-                            Course name : {{enableCourse.course_name}} Credit : {{enableCourse.credit}} Seatleft :
-                            {{enableCourse.seat}}
-                        </ol>
                         {%empty%}
-                        <ol>
-                            No course
-                        </ol>
+                        <h1 style="color: red;">I THINK YOU NEED TO ADD SOME COURSE</h1>
                         {% endfor%}
                     </div>
 
@@ -80,16 +96,31 @@
                         <h1>Course that you might interest</h1>
                     </div>
                     <div class="course_interest_content">
-                        {%for j in notCourse %}
-                        <ol>
-                            Course name : {{j.course_name}} Credit : {{j.credit}} Seatleft :
-                            {{j.seat}}
-                        </ol>
-                        {%empty%}
-                        <ol>
-                            No course
-                        </ol>
-                        {% endfor%}
+                        <style>
+                            table, th, td {  
+                                text-align: center;
+                            }
+                        </style>
+                            <table style="width:100%;overflow-y:scroll">
+                                <tr>
+                                    <th>Course name</th>
+                                    <th>Credit</th>
+                                    <th>Seatleft</th>
+                                </tr>
+                                {%for j in notCourse %}
+                                <tr>
+                                    
+                                    <td>{{j.course_name}}</td>
+                                    <td>{{j.credit}}</td>
+                                    <td>{{j.seat}}/{{j.maxSeat}}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                            </table>    
+                            {%for j in notCourse %}
+                            {%empty%}
+                            <h1 style="color: red;">NO COURSE!!</h1>
+                            {% endfor%}
                     </div>
                 </div>
             </div>
@@ -101,7 +132,8 @@
                         </div>
                     </div>
                     <div class="credit">
-                        <h1>Your credit:{{ studentUser.credit }}</h1>
+                        <h1>Your credit:{{ studentUser.credit }}/{{studentUser.maxCredit}}</h1>
+                        
                     </div>
                 </div>
                 <div class="sumbit">
@@ -110,6 +142,8 @@
                         <select name="course">
                             {% for course in notCourse %}
                             <option value="{{ course.id }}">{{course}}</option>
+                            {%empty%}                        
+                            <option value=""> course is empty</option>
                             {% endfor%}
                         </select>
                         <input type="submit" value="Add Course">
@@ -117,14 +151,18 @@
                 </div>
                 <div class="remove">
                     <form action="{% url 'users:rmCourse'%}" method="POST">
-                        {% csrf_token%}
+                        {% csrf_token %}
                         <select name="course">
                             {% for course in stu %}
                             <option value="{{ course.id }}">{{course}}</option>
+                            {%empty%}                            
+                            <option value=""> course is empty</option>
                             {% endfor%}
                         </select>
                         <input type="submit" value="remove Course">
                     </form>
+                  
+                    
                 </div>
             </div>
         </div>
