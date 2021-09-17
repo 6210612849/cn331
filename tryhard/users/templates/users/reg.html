@@ -7,84 +7,128 @@
 </head>
 
 <body>
-    <div class="topnav">
-        <a class="Main" href="{% url 'first:index'%}">Home </a>
-        <a href="{% url 'reg:index' %}">Course List</a>
-        <a href="{% url 'users:index'%}">Website Profile</a>
-        <a href="{% url 'first:index'%}">Contact</a>
+    <div class="scroll">
+        <div class="topnav">
+            <a class="Main" href="{% url 'first:index'%}">Home </a>
+            <a href="{% url 'reg:index' %}">Course List</a>
+            <a href="{% url 'users:index'%}">Website Profile</a>
+            <a href="{% url 'first:index'%}">Contact</a>
 
-        <a class="login" href="{% url 'users:index'%}">
-            <div class="user_status">
-                {%if request.user.is_authenticated %}
-                <div class="user_status_on">
-                    Username: {{request.user}}
+            <a class="login" href="{% url 'users:index'%}">
+                <div class="user_status">
+                    {%if request.user.is_authenticated %}
+                    <div class="user_status_on">
+                        Username: {{request.user}}
+                    </div>
+                    {% else %}
+                    <div class="user_status_off">
+                        Please Login!
+                    </div>
+                    {%endif%}
+
                 </div>
-                {% else %}
-                <div class="user_status_off">
-                    Please Login!
+            </a>
+        </div>
+        <div class="user_profile">
+            <div class="bar">
+                <div class="picture">
                 </div>
-                {%endif%}
-
-            </div>
-        </a>
-    </div>
-    <div class="user_profile">
-        <div class="picture">
-
-        </div>
-        <div class="information">
-            <div class="information_name">
-                <ol> Hi! : {{request.user}}</ol>
-            </div>
-            <div class="information_change">
-                <ol><a href="{%url 'users:change'%}">Change picture profile</a></ol>
-            </div>
-            <div class="information_regis">
-                <ol><a href="{%url 'users:reg'%}">Regis</a></ol>
+                <div class="information">
+                    <div class="information_name">
+                        <ol> Hi! : {{request.user}}</ol>
+                    </div>
+                    <div class="information_change">
+                        <ol><a href="{%url 'users:change'%}">Change picture profile</a></ol>
+                    </div>
+                    <div class="information_regis">
+                        <ol><a href="{%url 'users:reg'%}">Regis</a></ol>
+                    </div>
+                    <div class="information_logout">
+                        <ol><a href="{%url 'users:login'%}">Logout</a></ol>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="reg_content">
+            <div class="list">
+                <div class="reg_header">
+                    <h1>
+                        Register
+                    </h1>
+                </div>
+                <div class="your_course">
+                    <div class="your_course_head">
+                        <h1>Your Course</h1>
+                    </div>
+                    <div class="your_course_content">
+                        {%for enableCourse in stu %}
+                        <ol>
+                            Course name : {{enableCourse.course_name}} Credit : {{enableCourse.credit}} Seatleft :
+                            {{enableCourse.seat}}
+                        </ol>
+                        {%empty%}
+                        <ol>
+                            No course
+                        </ol>
+                        {% endfor%}
+                    </div>
+
+                </div>
+
+                <div class="course_interest">
+                    <div class="course_interest_head">
+                        <h1>Course that you might interest</h1>
+                    </div>
+                    <div class="course_interest_content">
+                        {%for j in notCourse %}
+                        <ol>
+                            Course name : {{j.course_name}} Credit : {{j.credit}} Seatleft :
+                            {{j.seat}}
+                        </ol>
+                        {%empty%}
+                        <ol>
+                            No course
+                        </ol>
+                        {% endfor%}
+                    </div>
+                </div>
+            </div>
+            <div class="course_regis">
+                <div class="register">
+                    <div class="header">
+                        <div class="text">
+                            <h2>edit course</h2>
+                        </div>
+                    </div>
+                    <div class="credit">
+                        <h1>Your credit:{{ studentUser.credit }}</h1>
+                    </div>
+                </div>
+                <div class="sumbit">
+                    <form action="{% url 'users:addCourse'%}" method="POST">
+                        {% csrf_token%}
+                        <select name="course">
+                            {% for course in notCourse %}
+                            <option value="{{ course.id }}">{{course}}</option>
+                            {% endfor%}
+                        </select>
+                        <input type="submit" value="Add Course">
+                    </form>
+                </div>
+                <div class="remove">
+                    <form action="{% url 'users:rmCourse'%}" method="POST">
+                        {% csrf_token%}
+                        <select name="course">
+                            {% for course in stu %}
+                            <option value="{{ course.id }}">{{course}}</option>
+                            {% endfor%}
+                        </select>
+                        <input type="submit" value="remove Course">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="reg_content">
-        <h5>{{ massage }}</h5>
+</body>
 
-        <a>Your credit:{{ studentUser.credit }}</a>
-        <h1>Your Course</h1>
-        <h1></h1>
-
-        {%for enableCourse in stu %}
-        <li>
-            {{enableCourse}}
-        </li>
-        {% endfor%}
-
-        <h1>Course that you might interest</h1>
-
-        {%for j in notCourse %}
-        <li>
-            {{j}}
-        </li>
-        {% endfor%}
-
-        <h2>edit course</h2>
-        <form action="{% url 'users:addCourse'%}" method="POST">
-            {% csrf_token%}
-            <select name="course">
-                {% for course in notCourse %}
-                <option value="{{ course.id }}">{{course}}</option>
-                {% endfor%}
-            </select>
-            <input type="submit" value="Add Course">
-        </form>
-
-        <form action="{% url 'users:rmCourse'%}" method="POST">
-            {% csrf_token%}
-            <select name="course">
-                {% for course in stu %}
-                <option value="{{ course.id }}">{{course}}</option>
-                {% endfor%}
-            </select>
-            <input type="submit" value="remove Course">
-        </form>
-
-        <p><a href="{% url 'reg:index'%}">Course List</a></p>
-    </div>
+</html>

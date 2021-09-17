@@ -1,11 +1,13 @@
 
     body {
         margin: 0;
+        width :100%;
+        height: 100%;
         font-family: Arial, Helvetica, sans-serif;
     }
 
     .topnav {
-        width: auto;
+        width: 100%;
         overflow: hidden;
         background-color: rgb(49, 51, 20);
         height: 100px;
@@ -91,20 +93,22 @@
         text-decoration: none;
     }
     .user_profile{
+        height: 100%;
+        width: 300px;
+        position: fixed!important;
+        z-index: 1;
         float: left;
-        width: 400px;
-        height: 2000px;
         background-color:rgb(255, 140, 106)
     }
-    .user_profile .picture{
     
-        width: 350px;
-        height: 350px;
-        background-image: url(/static/assets/admin/img/ayaya.png);
+    .user_profile .picture{
+        width: 250px;
+        height: 250px;
+        background-image: url("/static/assets/admin/img/ayaya.png");
         background-repeat: no-repeat;
         background-size: cover;
-        border: 10px dashed rgb(4, 71, 255);
         margin-left: 15px;
+        margin-top: 15px;
     }
     .user_profile .information {
         padding-top: 100px;
@@ -117,8 +121,9 @@
     .user_profile .information .information_name ol {
         margin-left: 20px;
         text-decoration: none;
-        font-size: 30px;
-        color: black;}
+        font-size: 20px;
+        color: black;
+    }
     
     .user_profile .information .information_change{
      
@@ -127,6 +132,18 @@
         padding: 20px;
         
     }
+    .user_profile .information .information_logout{
+     
+        background-color: rgb(253, 208, 194);
+        margin-top: 20px;
+           padding: 20px;
+           }
+    .user_profile .information .information_logout ol:hover{
+    
+        border-radius: 200px;
+        color: black;
+        background-color: rgb(255, 234, 227);}
+    
     .user_profile .information .information_regis{
         width: 380x;
         height: 60x;
@@ -150,13 +167,80 @@
     .user_profile .information .information_regis ol a{
     
         text-decoration: none;
-        font-size: 30px;
+        font-size: 20px;
         color: black;}
     .user_profile .information .information_change ol a{
     
         text-decoration: none;
-        font-size: 30px;
+        font-size: 20px;
     color: black;}
+    .user_profile .information .information_logout ol a{
+    
+        text-decoration: none;
+        font-size: 20px;
+    color: black;}
+
     .reg_content{
-        height: 2000px;
+        width: 90%;
+        height: 100%;
+        margin-left: 300px;
+        padding-top: 44px;
+        position: fixed!important;
     }
+    .reg_content .header{
+        
+        margin-top: 20px;
+    }
+    .reg_content .reg_header h1{
+        
+        padding-left: 50px;
+    }
+
+    .reg_content .list{
+        width: 70%;
+        height: 100%;
+        float: left;
+    }
+    .reg_content .your_course{
+        margin-left: 20px;
+        background-color: #f2f2f2;
+        padding-bottom: 20px;
+    }
+    .reg_content .your_course .your_course_head{
+        text-align: left;
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .reg_content .course_interest{
+        margin-top: 40px;
+        margin-left: 20px;
+        background-color: #f2f2f2;
+        padding-bottom: 20px;
+    }
+    .reg_content .course_interest .course_interest_head{
+        text-align: left;
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .reg_content .your_course .your_course_content{
+        font-style: italic;
+        background-color: #ffffff;
+        margin-left: 10px;
+        margin-right: 10px;
+      
+    }
+    .reg_content .course_interest .course_interest_content{
+        font-style: italic;
+        background-color: #ffffff;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .reg_content .course_regis{
+        margin-left:65%;
+        float: left;
+        position: fixed!important;
+        background-color: #e4e4e4;
+        border-radius: 10px;
+        pad
+    }
+   
