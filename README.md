@@ -16,6 +16,7 @@ Models
 Course is objected that Student and add it to their own subjects they have many-to-many relation they can call each other 
 
 #### Student
+Student is pretend to be user they can add their own course and remove it
 
 
 ## Actions
