@@ -21,6 +21,12 @@ Student is pretend to be user they can add their own course and remove it
 
 ## Actions
 if you are __admin__ 
+you must login on /admin
 1. **add** student or course to database
 2. **remove** student or course to database
 3. **edit** attribute in student and course
+
+if you are _student_
+- **add** course to their own course list
+- **remove** course to their own course list
+-
