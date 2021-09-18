@@ -1,172 +1,228 @@
 {%load static%}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>REGS</title>
-    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+    <title>REGISTION</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+
+        .navbar-brand img {
+            height: 100%;
+            margin-right: 0px;
+        }
+
+        .navbar-inverse .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding: 0px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="scroll">
-        <div class="topnav">
-            <a class="Main" href="{% url 'first:index'%}">Home </a>
-            <a href="{% url 'reg:index' %}">Course List</a>
-            <a href="{% url 'users:index'%}">Website Profile</a>
-            <a href="{% url 'first:index'%}">Contact</a>
-
-            <a class="login" href="{% url 'users:index'%}">
-                <div class="user_status">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">
+                    <img classs="img-responsive" width="50px" height="" src="/static/assets/admin/img/scf.png">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href=" {% url 'first:index' %}">HOME</a></li>
+                    <li><a href="{% url 'reg:index' %}">Course</a></li>
+                    <li class="active"><a href="{% url 'users:index' %}">Profile</a></li>
+                    <li><a href="{% url 'first:contact' %}">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     {%if request.user.is_authenticated %}
-                    <div class="user_status_on">
-                        Username: {{request.user}}
-                    </div>
+                    <li style="color: #f1f1f1; float:left!important;margin-right:20px;margin-top: 15px;">
+                        Username:
+                        {{request.user}}
+
+                    </li>
+                    <li>
+                        <a href="{% url 'users:logout'%}">click here to log out
+                            <span class="glyphicon glyphicon-log-out"></span></a>
+                    </li>
+                    </a>
+                    </li>
                     {% else %}
-                    <div class="user_status_off">
-                        Please Login!
-                    </div>
+                    <li style="color: #f1f1f1; float:left!important;margin-right:20px;margin-top: 15px;">
+                        Not Log-in
+                    </li>
+                    <li>
+                        <a href="{% url 'users:login'%}">click here to log in
+                            <span class="glyphicon glyphicon-log-in"></span></a>
+                    </li>
+                    </a>
+                    </li>
                     {%endif%}
-
-                </div>
-            </a>
-        </div>
-        <div class="user_profile">
-            <div class="bar">
-                <div class="picture">
-                </div>
-                <div class="information">
-                    <div class="information_name">
-                        <ol> Hi!: {{request.user}}</ol>
-                    </div>
-                    <div class="information_change">
-                        <ol><a href="{%url 'users:change'%}">Change picture profile</a></ol>
-                    </div>
-                    <div class="information_regis">
-                        <ol><a href="{%url 'users:reg'%}">Regist</a></ol>
-                    </div>
-                    <div class="information_logout">
-                        <ol><a href="{%url 'users:login'%}">Logout</a></ol>
-                    </div>
-                </div>
+                </ul>
             </div>
         </div>
-        <div class="reg_content">
-            <div class="list">
-                <div class="reg_header">
-                    <h1>
-                        Register
-                    </h1>
-                </div>
-                <div class="your_course">
-                    <div class="your_course_head">
-                        <h1>Your Course</h1>
-                    </div>
-                    <div class="your_course_content">
-                        <style>
-                            table, th, td {  
-                                text-align: center;
-                            }
-                            </style>
-                            <table style="width:100%">
-                                <tr>
-                                    <th>Course name</th>
-                                    <th>Credit</th>
-                                    <th>Seatleft</th>
-                                </tr>
-                                {% for enableCourse in stu %}
-                                <tr>
-                                    
-                                    <td>{{enableCourse.course_name}}</td>
-                                    <td>{{enableCourse.credit}}</td>
-                                    <td>{{enableCourse.seat}}</td>
-                                    
-                                </tr>
-                                {% endfor %}
-                              </table>    
-                        {%for enableCourse in stu %}
+    </nav>
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav ">
+                <a href="{% url 'users:index'%}" class="btn btn-primary btn-lg active" role="button"
+                    aria-pressed="true">back to profile</a>
+            </div>
+            <div class="col-sm-8 text-left">
+                <h1>Profile Your credit:{{ studentUser.credit }}</h1>
+                <hr>
+                <h3>
+                    WELCOME : {{request.user}}
+                </h3>
+                <hr>
+                <p>
+                    <style>
+                        table,
+                        th,
+                        td {
+                            text-align: center;
+                        }
+                    </style>
+                <table style="width:100%">
+                    <tr>
+                        <th>Course name</th>
+                        <th>Credit</th>
+                        <th>Seatleft</th>
+                    </tr>
+                    {% for enableCourse in stu %}
+                    <tr>
+
+                        <td>{{enableCourse.course_name}}</td>
+                        <td>{{enableCourse.credit}}</td>
+                        <td>{{enableCourse.seat}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </table>
+                {%for enableCourse in stu %}
+                {%empty%}
+                <h1 style="color: red;">I THINK YOU NEED TO ADD SOME COURSE</h1>
+                {% endfor%}
+                </p>
+                <hr>
+                <p>
+                <h1>Course that you might interest</h1>
+                <style>
+                    table,
+                    th,
+                    td {
+                        text-align: center;
+                    }
+                </style>
+                <table style="width:100%">
+                    <tr>
+                        <th>Course name</th>
+                        <th>Credit</th>
+                        <th>Seatleft</th>
+                    </tr>
+                    {%for j in notCourse %}
+                    <tr>
+                        <td>{{j.course_name}}</td>
+                        <td>{{j.credit}}</td>
+                        <td>{{j.seat}}/{{j.maxSeat}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {%for j in notCourse %}
+                {%empty%}
+                <h1 style="color: red;">NO COURSE!!</h1>
+                {% endfor%}
+                </table>
+
+                <hr>
+            </div>
+            <div class="sumbit">
+                <form action="{% url 'users:addCourse'%}" method="POST">
+                    {% csrf_token%}
+                    <select name="course">
+                        {% for course in notCourse %}
+                        <option value="{{ course.id }}">{{course}}</option>
                         {%empty%}
-                        <h1 style="color: red;">I THINK YOU NEED TO ADD SOME COURSE</h1>
+                        <option value=""> course is empty</option>
                         {% endfor%}
-                    </div>
-
-                </div>
-
-                <div class="course_interest">
-                    <div class="course_interest_head">
-                        <h1>Course that you might interest</h1>
-                    </div>
-                    <div class="course_interest_content">
-                        <style>
-                            table, th, td {  
-                                text-align: center;
-                            }
-                        </style>
-                            <table style="width:100%;overflow-y:scroll">
-                                <tr>
-                                    <th>Course name</th>
-                                    <th>Credit</th>
-                                    <th>Seatleft</th>
-                                </tr>
-                                {%for j in notCourse %}
-                                <tr>
-                                    
-                                    <td>{{j.course_name}}</td>
-                                    <td>{{j.credit}}</td>
-                                    <td>{{j.seat}}/{{j.maxSeat}}</td>
-                                    
-                                </tr>
-                                {% endfor %}
-                            </table>    
-                            {%for j in notCourse %}
-                            {%empty%}
-                            <h1 style="color: red;">NO COURSE!!</h1>
-                            {% endfor%}
-                    </div>
-                </div>
+                    </select>
+                    <input type="submit" value="Add Course">
+                </form>
             </div>
-            <div class="course_regis">
-                <div class="register">
-                    <div class="header">
-                        <div class="text">
-                            <h2>edit course</h2>
-                        </div>
-                    </div>
-                    <div class="credit">
-                        <h1>Your credit:{{ studentUser.credit }}/{{studentUser.maxCredit}}</h1>
-                        
-                    </div>
-                </div>
-                <div class="sumbit">
-                    <form action="{% url 'users:addCourse'%}" method="POST">
-                        {% csrf_token%}
-                        <select name="course">
-                            {% for course in notCourse %}
-                            <option value="{{ course.id }}">{{course}}</option>
-                            {%empty%}                        
-                            <option value=""> course is empty</option>
-                            {% endfor%}
-                        </select>
-                        <input type="submit" value="Add Course">
-                    </form>
-                </div>
-                <div class="remove">
-                    <form action="{% url 'users:rmCourse'%}" method="POST">
-                        {% csrf_token %}
-                        <select name="course">
-                            {% for course in stu %}
-                            <option value="{{ course.id }}">{{course}}</option>
-                            {%empty%}                            
-                            <option value=""> course is empty</option>
-                            {% endfor%}
-                        </select>
-                        <input type="submit" value="remove Course">
-                    </form>
-                  
-                    
+            <div class="remove">
+                <form action="{% url 'users:rmCourse'%}" method="POST">
+                    {% csrf_token %}
+                    <select name="course">
+                        {% for course in stu %}
+                        <option value="{{ course.id }}">{{course}}</option>
+                        {%empty%}
+                        <option value=""> course is empty</option>
+                        {% endfor%}
+                    </select>
+                    <input type="submit" value="remove Course">
+                </form>
+
+
+
+
+                <div class="col-sm-2 sidenav">
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="container-fluid text-center">
+        <p>CN331 ONLY</p>
+    </footer>
+
 </body>
 
 </html>

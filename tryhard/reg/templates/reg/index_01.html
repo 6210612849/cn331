@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' href='/static/assets/admin/css/first_styles.css' />
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="Main" href="{% url 'first:index'%}">Home </a>
+        <a href="{% url 'reg:index' %}">Course List</a>
+        <a href="{% url 'users:index'%}">Website Profile</a>
+        <a href="{% url 'first:index'%}">Contact</a>
+
+        <a class="login" href="{% url 'users:index'%}">
+            <div class="user_status">
+                {%if request.user.is_authenticated %}
+                <div class="user_status_on">
+                    Username: {{request.user}}
+                </div>
+                {% else %}
+                <div class="user_status_off">
+                    Please Login!
+                </div>
+                {%endif%}
+
+            </div>
+        </a>
+    </div>
+
+    <div class="content">
+        <div class="content_head">
+            Course
+        </div>
+        <div class="content_list">
+            {% for i in reg %}
+            <ol>
+                <div class="content_list_id">
+                    Course : {{i.id}}
+                </div>
+                <div class="content_list_name">
+                    Course name : {{i.course_name}}
+                </div>
+                <div class="content_list_credit">
+                    Credit: {{i.credit}}
+                </div>
+                <div class="content_list_seat">
+                    Seat : {{i.seat}}/{{i.maxSeat}}
+                </div>
+                <a>no detail</a>
+            </ol>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>

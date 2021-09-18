@@ -79,15 +79,14 @@ def addCourse(request):
             course_credit = Course.objects.get(pk=(course)).credit
             course_seat = Course.objects.get(pk=(course)).seat
 
-
             if (student_credit >= course_credit) and (course_seat > 0):
                 student_credit = student_credit - course_credit
                 course_seat = course_seat - student_seat
-                Student.objects.filter(pk=request.user.id).update(credit=student_credit)
+                Student.objects.filter(pk=request.user.id).update(
+                    credit=student_credit)
                 Course.objects.filter(pk=(course)).update(seat=course_seat)
-                student = student.subjects.add(course)             
+                student = student.subjects.add(course)
     return HttpResponseRedirect(reverse("users:reg"))
-        
 
 
 def rmCourse(request):
@@ -95,7 +94,7 @@ def rmCourse(request):
     if request.method == "POST":
         student = Student.objects.get(pk=(request.user.id))
         c = request.POST["course"]
-        if c != "":       
+        if c != "":
             course_credit = Course.objects.get(pk=(c)).credit
             student_credit = Student.objects.get(pk=(request.user.id)).credit
             student_seat = 1
@@ -106,14 +105,8 @@ def rmCourse(request):
                 student_credit = student_credit + course_credit
                 course_seat = course_seat + student_seat
                 Student.objects.filter(pk=request.user.id).update(
-                credit=student_credit)
+                    credit=student_credit)
                 Course.objects.filter(pk=(c)).update(seat=course_seat)
                 student = student.subjects.remove(c)
 
     return HttpResponseRedirect(reverse("users:reg"))
-          
-
-
-def change(request):
-
-    return render(request, "users/change.html")

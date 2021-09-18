@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>HOME</title>
+    <title>CONTACT</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -75,10 +75,10 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href=" {% url 'first:index' %}">HOME</a></li>
+                    <li><a href=" {% url 'first:index' %}">HOME</a></li>
                     <li><a href="{% url 'reg:index' %}">Course</a></li>
                     <li><a href="{% url 'users:index' %}">Profile</a></li>
-                    <li><a href="{% url 'first:contact' %}">Contact</a></li>
+                    <li class="active"><a href="{% url 'first:contact' %}">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {%if request.user.is_authenticated %}
@@ -115,7 +115,19 @@
 
             </div>
             <div class="col-sm-8 text-left">
-                <h1>Welcome</h1>
+                <h1>Contact</h1>
+
+                <p class="text-left ">
+
+                    CN331 assignment2
+                    Member
+
+                    1. Name Ittipat Purathep Student id 6210612583
+                    2. Name Nuttakit Kongkaew Student id 6210612849
+
+
+                </p>
+
                 <hr>
 
             </div>

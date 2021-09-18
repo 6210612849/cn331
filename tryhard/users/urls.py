@@ -10,5 +10,4 @@ urlpatterns = [
     path("reg", views.reg, name="reg"),
     path("addCourse", views.addCourse, name="addCourse"),
     path("rmCourse", views.rmCourse, name="rmCourse"),
-    path("change", views.change, name="change"),
 ]
