@@ -1,1 +1,1 @@
-web:gunicorn tryhard.wsgi
+web: gunicorn tryhard.wsgi
