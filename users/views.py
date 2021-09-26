@@ -73,10 +73,10 @@ def reg(request):
 
 def addCourse(request):
     if request.method == "POST":
-        student = Student.objects.get(pk=(request.user.id))
+        student = Student.objects.get(student_id=request.user)
         course = request.POST["course"]
         if course != "":
-            student_credit = Student.objects.get(pk=(request.user.id)).credit
+            student_credit = Student.objects.get(student_id=request.user).credit
             student_seat = 1
             course_credit = Course.objects.get(pk=(course)).credit
             course_seat = Course.objects.get(pk=(course)).seat
@@ -84,7 +84,7 @@ def addCourse(request):
             if (student_credit >= course_credit) and (course_seat > 0):
                 student_credit = student_credit - course_credit
                 course_seat = course_seat - student_seat
-                Student.objects.filter(pk=request.user.id).update(
+                Student.objects.filter(student_id=request.user).update(
                     credit=student_credit)
                 Course.objects.filter(pk=(course)).update(seat=course_seat)
                 student = student.subjects.add(course)
@@ -94,11 +94,11 @@ def addCourse(request):
 def rmCourse(request):
     print(request.POST)
     if request.method == "POST":
-        student = Student.objects.get(pk=(request.user.id))
+        student = Student.objects.get(student_id=request.user)
         c = request.POST["course"]
         if c != "":
             course_credit = Course.objects.get(pk=(c)).credit
-            student_credit = Student.objects.get(pk=(request.user.id)).credit
+            student_credit = Student.objects.get(student_id=request.user).credit
             student_seat = 1
             course_seat = Course.objects.get(pk=(c)).seat
             course_maxSeat = Course.objects.get(pk=(c)).maxSeat
@@ -106,7 +106,7 @@ def rmCourse(request):
             if (course_seat <= course_maxSeat):
                 student_credit = student_credit + course_credit
                 course_seat = course_seat + student_seat
-                Student.objects.filter(pk=request.user.id).update(
+                Student.objects.filter(student_id=request.user).update(
                     credit=student_credit)
                 Course.objects.filter(pk=(c)).update(seat=course_seat)
                 student = student.subjects.remove(c)
