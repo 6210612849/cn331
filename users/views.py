@@ -57,7 +57,7 @@ def reg(request):
     #stu = Student.objects.get(pk=request.user.id).subjects.all()
     stu = get_object_or_404(Student, student_id=request.user).subjects.all()
 
-    studentUser = Student.objects.get(pk=(request.user.id))
+    studentUser = Student.objects.get(student_id=request.user)
     notCourse = Course.objects.exclude(pk__in=stu)
 
     stu_list = []
