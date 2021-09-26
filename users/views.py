@@ -2,6 +2,7 @@ from reg.models import Course, Student
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -53,7 +54,8 @@ def logout_view(request):
 
 def reg(request):
 
-    stu = Student.objects.get(pk=request.user.id).subjects.all()
+    #stu = Student.objects.get(pk=request.user.id).subjects.all()
+    stu = get_object_or_404(Student, pk=request.user.id).subjects.all()
 
     studentUser = Student.objects.get(pk=(request.user.id))
     notCourse = Course.objects.exclude(pk__in=stu)
