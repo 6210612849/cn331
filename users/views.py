@@ -55,7 +55,7 @@ def logout_view(request):
 def reg(request):
 
     #stu = Student.objects.get(pk=request.user.id).subjects.all()
-    stu = get_object_or_404(Student, pk=request.user.id).subjects.all()
+    stu = get_object_or_404(Student, student_id=request.user).subjects.all()
 
     studentUser = Student.objects.get(pk=(request.user.id))
     notCourse = Course.objects.exclude(pk__in=stu)
