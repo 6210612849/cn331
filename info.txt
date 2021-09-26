@@ -1,0 +1,61 @@
+course
+
+id, name, seat, credit
+
+1. cn101 computor intro 50 3
+2. cn102 computor practice1 50 1
+3. ma111 calculus1 99 3
+4. cn201 oop 50 4
+5. cn103 programming practice2 50 1
+6. ma112 applied calculus 99 3
+7. cn202 data and algorithms1 50 3
+8. cn260 circuit $ electronic 50 3
+9. cn261 circuit $ electronic lab 50 1
+10. cn200 discrete maths 50 3
+11. cn204 Probability & random processes 50 3
+12. ma214 Diff. Equations 99 3
+13. cn203 data and algorithms2 50 3
+14. cn210 comp.arch 50 3
+15. cn230 database 50 3
+16. cn262 digital circuit design 50 3
+17. cn240 Data Science for Signal Processing 50 3
+18. tu050 English skill Dev 50 0
+19. tu105 Comn. skill English 50 3
+20. tu100 civic engagement 99 3
+
+admin
+USERNAME, PASSWORD, EMAIL ADDRESS, FIRSTNAME, LASTNAME
+admintest   , admintest   , admin.example.com, ad   , min
+6210612000, Thisispassword, Harry@example.com, Harry, Johnson
+6210612001, Thisispassword, jonathan@example.com, Jonathan, Jonathan
+6210612002, Thisispassword, jotaro@example.com, Kujo, Jotaro
+6210612003, Thisispassword, jaseph@example.com, Joseph, jostar
+6210612004, Thisispassword, abudul@example.com, Muhammad, Abudul
+
+Student
+CN331 assignment2
+====
+Member
+----
+1. Name Ittipat Purathep Student id 6210612583
+2. Name Ittipat Purathep Student id 6210612849
+
+Description
+----
+...this project is about  act to be a register website for student
+...student can enroll and withdraw there 
+
+Models
+---
+#### Course
+Course is objected that Student and add it to their own subjects they have many-to-many relation they can call each other 
+
+#### Student
+
+
+## Actions
+if you are __admin__ 
+1. **add** student or course to database
+2. **remove** student or course to database
+3. **edit** attribute in student and course
+
