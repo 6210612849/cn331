@@ -26,5 +26,8 @@ class Student(models.Model):
     credit = models.IntegerField(null=True)
     maxCredit = models.IntegerField(null=True)
 
+    def is_no_credit():
+        return credits > 0
+
     def __str__(self):
         return f" {self.student_id}"
