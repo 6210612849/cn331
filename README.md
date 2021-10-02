@@ -3,7 +3,7 @@ CN331 assignment2
 Member
 ----
 - Name Ittipat Purathep Student id 6210612583
-- Name Ittipat Purathep Student id 6210612849
+- Name nuttakit kongkaew Student id 6210612849
 
 Description
 ----
