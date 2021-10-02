@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'tryhard.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 """
+use upper code when you run on local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,6 +86,7 @@ DATABASES = {
     }
 }
 """
+#use this lower code when you run on heroku 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
